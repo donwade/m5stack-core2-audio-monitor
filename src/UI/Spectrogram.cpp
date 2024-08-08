@@ -8,6 +8,10 @@
 Spectrogram::Spectrogram(Palette *palette, int x, int y, int width, int height)
     : Component(x, y, width, height)
 {
+
+  printf("Spectrogram::Spectrogram : x=%d y=%d w=%d h=%d\n",
+  		  x, y, width, height);
+
   m_palette = palette;
   this->bitmap = new Bitmap(width, height);
 }

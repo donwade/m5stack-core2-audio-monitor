@@ -41,7 +41,7 @@ void fft_filend(FILE * fin,FILE * fout,int *dims,int ndims,int isinverse)
     kiss_fftnd_cfg st;
     kiss_fft_cpx *buf;
     int dimprod=1,i;
-    for (i=0;i<ndims;++i) 
+    for (i=0;i<ndims;++i)
         dimprod *= dims[i];
 
     buf = (kiss_fft_cpx *) malloc (sizeof (kiss_fft_cpx) * dimprod);
@@ -66,7 +66,7 @@ void fft_filend_real(FILE * fin,FILE * fout,int *dims,int ndims,int isinverse)
     void *obuf;
     int insize,outsize; // size in bytes
 
-    for (i=0;i<ndims;++i) 
+    for (i=0;i<ndims;++i)
         dimprod *= dims[i];
     insize = outsize = dimprod;
     int rdim = dims[ndims-1];
@@ -136,14 +136,18 @@ int get_dims(char * arg,int * dims)
         if (p0)
             *p0++ = '\0';
         dims[ndims++] = atoi(arg);
-//         fprintf(stderr,"dims[%d] = %d\n",ndims-1,dims[ndims-1]); 
+//         fprintf(stderr,"dims[%d] = %d\n",ndims-1,dims[ndims-1]);
         arg = p0;
     }while (p0);
     return ndims;
 }
 
+#include <assert.h>
+
 int main(int argc,char ** argv)
 {
+    assert( &main == 0 );      // main is called???
+    assert(0);
     int isinverse=0;
     int isreal=0;
     FILE *fin=stdin;
@@ -178,7 +182,7 @@ int main(int argc,char ** argv)
     }
 
     if ( optind < argc ) {
-        if ( strcmp("-",argv[optind]) !=0 ) 
+        if ( strcmp("-",argv[optind]) !=0 )
             fout = fopen(argv[optind],"wb");
         ++optind;
     }

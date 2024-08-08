@@ -6,6 +6,8 @@
 Waveform::Waveform(M5Display &display, int x, int y, int width, int height, int num_samples)
     : Component(x, y, width, height)
 {
+  printf("Waveform::Waveform : x=%d y=%d w=%d h=%d num_samples=%d\n",
+  		  x, y, width, height, num_samples);
   m_num_samples = num_samples;
   m_samples = static_cast<float *>(ps_malloc(sizeof(float) * num_samples));
 }

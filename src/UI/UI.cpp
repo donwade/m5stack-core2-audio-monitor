@@ -59,7 +59,7 @@ void UI::draw()
   draw_time += end - start;
   draw_count++;
   if (draw_count == 20) {
-    Serial.printf("Drawing time %ld\n", draw_time / 20);
+    // dwade Serial.printf("Drawing time %ld\n", draw_time / 20);
     draw_count = 0;
     draw_time = 0;
   }

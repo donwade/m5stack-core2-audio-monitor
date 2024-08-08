@@ -11,6 +11,9 @@ GraphicEqualiser::GraphicEqualiser(
     Palette *palette, int x, int y, int width, int height, int num_bins)
     : Component(x, y, width, height)
 {
+  printf("GraphicEqualiser::GraphicEqualiser : x=%d y=%d w=%d h=%d num_bins=%d\n",
+  		  x, y, width, height, num_bins);
+
   m_palette = palette;
   m_num_bins = num_bins;
   bar_chart = static_cast<float *>(malloc(sizeof(float) * num_bins));
