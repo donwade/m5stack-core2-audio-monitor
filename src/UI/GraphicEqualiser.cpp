@@ -49,28 +49,50 @@ void GraphicEqualiser::_draw(M5Display &display)
 {
   int x = 0;
   int x_step = int(320.0f / (m_num_bins / 16));
-  for (int i = 2; i < m_num_bins / 4; i += 4) {
+
+  for (int i = 2; i < m_num_bins / 4; i += 4)
+  {
+    // average of 4 samples why?
     float ave = 0;
-    for (int j = 0; j < 4; j++) {
+    for (int j = 0; j < 4; j++)
+    {
       ave += bar_chart[i + j];
     }
     ave /= 4;
-    int bar_value = std::min(120.0f, 0.25f * ave);
+
+    // average of this sample of 4.
+
+	// normally confine to vert disp of 'heigth', allow it
+	// to be out of its lane for observation.
+	float zoom = (float) height * 1.6;
+
+    int bar_value = std::min( zoom , 0.25f * ave);
+
+    //
     ave = 0;
-    for (int j = 0; j < 4; j++) {
+    for (int j = 0; j < 4; j++)
+    {
       ave += bar_chart_peaks[i + j];
     }
+
     ave /= 4;
-    int peak_value = std::min(120.0f, 0.25f * ave);
-    display.fillRect(x, 120, x_step, 120 - bar_value, 0);
+
+    int peak_value = std::min(zoom , 0.25f * ave);
+
+    display.fillRect(x, height, x_step, height - bar_value, 0);
     display.drawLine(x,
-                     240 - peak_value,
+                     height * 2 - peak_value,
                      x + x_step - 1,
-                     240 - peak_value,
+                     height * 2 - peak_value,
                      m_palette->get_color(135 + peak_value));
-    display.fillRect(
-        x, 240 - bar_value, x_step - 1, bar_value, m_palette->get_color(135 + bar_value));
+
+    display.fillRect(x,
+    				height *2 - bar_value,
+    				x_step - 1,
+    				bar_value,
+    				m_palette->get_color(135 + bar_value));
+
     x += x_step;
   }
-  display.fillRect(x, 120, 320 - x, 120, 0);
+  display.fillRect(x, height, width - x, height, 0);
 }
