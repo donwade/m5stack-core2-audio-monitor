@@ -26,5 +26,5 @@ void Spectrogram::update(float *mag)
 
 void Spectrogram::_draw(M5Display &display)
 {
-  display.drawBitmap(x, y, bitmap->width, bitmap->height, bitmap->pixels);
+  display.drawBitmap(lhs, top, bitmap->width, bitmap->height, bitmap->pixels);
 }
