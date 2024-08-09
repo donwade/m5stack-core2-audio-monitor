@@ -48,7 +48,7 @@ void GraphicEqualiser::update(float *mag)
 void GraphicEqualiser::_draw(M5Display &display)
 {
   int x = 0;
-  int x_step = int(320.0f / (m_num_bins / 16));
+  int x_step = int(width / (m_num_bins / 16));
 
   for (int i = 2; i < m_num_bins / 4; i += 4)
   {
@@ -64,9 +64,9 @@ void GraphicEqualiser::_draw(M5Display &display)
 
 	// normally confine to vert disp of 'heigth', allow it
 	// to be out of its lane for observation.
-	float zoom = (float) height * 1.6;
+	float max_vert = (float) height * 1.6;
 
-    int bar_value = std::min( zoom , 0.25f * ave);
+    int bar_value = std::min( max_vert , 0.25f * ave);
 
     //
     ave = 0;
@@ -76,8 +76,7 @@ void GraphicEqualiser::_draw(M5Display &display)
     }
 
     ave /= 4;
-
-    int peak_value = std::min(zoom , 0.25f * ave);
+    int peak_value = std::min(max_vert , 0.25f * ave);
 
     display.fillRect(x, height, x_step, height - bar_value, 0);
     display.drawLine(x,
